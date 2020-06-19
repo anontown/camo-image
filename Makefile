@@ -1,4 +1,4 @@
-IMAGE_NAME := camo
+IMAGE_NAME := at-camo
 TAG := $(REPO)/$(IMAGE_NAME):$(VER)
 
 .PHONY: noop
