@@ -21,8 +21,9 @@ jobs:
         run: |
           VER=${GITHUB_SHA::7}
           if [ "$GITHUB_REF" = "refs/heads/develop" ]; then
-              echo ::set-env name=VER::${VER}-dev
+            VER=${VER}-dev
           fi
+          echo ::set-env name=VER::${VER}
       - name: build
         run: make build REPO=$REPO VER=$VER
       - name: docker login
