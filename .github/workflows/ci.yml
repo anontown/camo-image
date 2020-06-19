@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: set version suffix
         run: |
-          if ["$REF" == "refs/heads/develop"]; then
+          if ["$REF" = "refs/heads/develop"]; then
               echo ::set-env name=VER::${VER}-dev
           fi
         env:
