@@ -15,16 +15,15 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REPO: docker.pkg.github.com/${{ github.repository }}
-      VER: ${{ github.sha }}
     steps:
       - uses: actions/checkout@v1
-      - name: set version suffix
+      - name: set version
         run: |
-          if ["$REF" = "refs/heads/develop"]; then
-              echo ::set-env name=VER::${VER}-dev
+          VER=${GITHUB_SHA::7}
+          if [ "$GITHUB_REF" = "refs/heads/develop" ]; then
+            VER=${VER}-dev
           fi
-        env:
-          REF: ${{ github.ref }}
+          echo ::set-env name=VER::${VER}
       - name: build
         run: make build REPO=$REPO VER=$VER
       - name: docker login
